@@ -1,17 +1,33 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Active Shift</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <div id="home-content" *ngIf="activeShift">
+    <div id="home-time-container">
+      <div class="home-time" *ngIf="!activeShift.active">
+        No active shift
+      </div>
+      <div *ngIf="working" [class.paused]="activeShift.paused" class="home-time">
+        {{ activeTime / 1000 | hhmmss }}
+      </div>
+      <div *ngIf="activeShift.paused" class="home-time">
+        {{ activePauseSeconds / 1000 | hhmmss }}
+      </div>
+    </div>
+    <div id="home-buttons">
+      <button ion-button icon-only *ngIf="!working" (click)="startNew()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+      <button ion-button icon-only *ngIf="working && activeShift" (click)="pause()">
+        <ion-icon name="pause" *ngIf="!activeShift.paused"></ion-icon>
+        <ion-icon name="play" *ngIf="activeShift.paused"></ion-icon>
+      </button>
+      <button ion-button icon-only *ngIf="working" (click)="stop()">
+        <ion-icon name="square"></ion-icon>
+      </button>
+    </div>
+  </div>
 </ion-content>

@@ -1,0 +1,7 @@
+<ion-item>
+  <p class="start-time">{{ shift.startTime | date }}</p>
+  <p class="active-time"><ion-icon name="time"></ion-icon>
+     {{ shift.activeTime / 1000 | hhmmss }}</p>
+  <p class="active-time"><ion-icon name="cafe"></ion-icon>
+     {{ shift.pauseTime / 1000 | hhmmss }}</p>
+</ion-item>
