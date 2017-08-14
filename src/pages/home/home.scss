@@ -8,6 +8,7 @@ page-home {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    width: 80%;
 
     #home-time-container {
       margin-bottom: 50px;
@@ -28,6 +29,10 @@ page-home {
         height: $button-size;
         width: $button-size;
       }
+    }
+
+    #home-contract {
+      margin-top: 20px;
     }
   }
 }

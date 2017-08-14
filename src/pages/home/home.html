@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Active Shift</ion-title>
   </ion-navbar>
 </ion-header>
@@ -7,7 +7,7 @@
 <ion-content padding>
   <div id="home-content" *ngIf="activeShift">
     <div id="home-time-container">
-      <div class="home-time" *ngIf="!activeShift.active">
+      <div class="home-time" *ngIf="!working">
         No active shift
       </div>
       <div *ngIf="working" [class.paused]="activeShift.paused" class="home-time">
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div id="home-buttons">
-      <button ion-button icon-only *ngIf="!working" (click)="startNew()">
+      <button ion-button icon-only [disabled]="!activeShift.contract" *ngIf="!working" (click)="startNew()">
         <ion-icon name="add"></ion-icon>
       </button>
       <button ion-button icon-only *ngIf="working && activeShift" (click)="pause()">
@@ -28,6 +28,21 @@
       <button ion-button icon-only *ngIf="working" (click)="stop()">
         <ion-icon name="square"></ion-icon>
       </button>
+    </div>
+    <div id="home-contract">
+      <ion-item *ngIf="contracts[0] || activeShift.contract">
+        <ion-label>Contract</ion-label>
+        <ion-select [disabled]="working" [(ngModel)]="activeShift.contract">
+          <ion-option *ngFor="let c of contracts" [value]="c">{{ c }}</ion-option>
+          <ion-option *ngIf="activeShift.contract && contracts.indexOf(activeShift.contract) === -1"
+                      [value]="activeShift.contract">
+            {{ activeShift.contract }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="!working">
+        <button ion-button full small (click)="addContract()">Add contract</button>
+      </div>
     </div>
   </div>
 </ion-content>

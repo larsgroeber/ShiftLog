@@ -19,7 +19,6 @@ export class ListPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListPage');
   }
 
 }

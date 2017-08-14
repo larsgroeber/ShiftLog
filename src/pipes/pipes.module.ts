@@ -1,15 +1,18 @@
 
 import {NgModule} from "@angular/core";
 import {HhmmssPipe} from "./hhmmss/hhmmss";
+import {FilterByContractPipe} from "./filter-by-contract/filter-by-contract";
 
 @NgModule({
 	declarations: [
-    HhmmssPipe
+    HhmmssPipe,
+    FilterByContractPipe
   ],
 	imports: [
   ],
 	exports: [
-	  HhmmssPipe
+	  HhmmssPipe,
+    FilterByContractPipe
   ]
 })
 export class PipesModule {}

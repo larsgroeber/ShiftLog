@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import {ShiftInterface} from "../../interfaces/shift";
 import {ShiftProvider} from "../../providers/shift/shift";
 
-/**
- * Generated class for the ShiftListComponent component.
- *
- * See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
- * for more info on Angular Components.
- */
 @Component({
   selector: 'shift-list',
   templateUrl: 'shift-list.html'
@@ -15,11 +9,16 @@ import {ShiftProvider} from "../../providers/shift/shift";
 export class ShiftListComponent {
 
   shifts: ShiftInterface[];
+  contracts = [];
 
   constructor(private shiftProvider: ShiftProvider) {
     this.shiftProvider.getAll().then(shifts => {
-      this.shifts = this.shiftProvider.shifts;
+      this.shifts = shifts;
+      this.contracts = this.shiftProvider.getContracts();
+    });
+    this.shiftProvider.shiftsUpdated.subscribe(shifts => {
+      this.shifts = shifts;
+      this.contracts = this.shiftProvider.getContracts();
     })
   }
-
 }

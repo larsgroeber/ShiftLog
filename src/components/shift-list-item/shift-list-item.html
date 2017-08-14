@@ -1,7 +1,11 @@
 <ion-item>
-  <p class="start-time">{{ shift.startTime | date }}</p>
+  <!--<p class="contract" float-right>{{ shift.contract }}</p>-->
+  <p class="start-time">{{ shift.startTime | date:'EEEE. MMM dd, yyyy - HH:mm' }}</p>
   <p class="active-time"><ion-icon name="time"></ion-icon>
-     {{ shift.activeTime / 1000 | hhmmss }}</p>
+    {{ shift.activeTime / 1000 | hhmmss }}</p>
+  <button ion-button icon-only clear color="danger" float-right (click)="deleteShift()">
+    <ion-icon name="trash"></ion-icon>
+  </button>
   <p class="active-time"><ion-icon name="cafe"></ion-icon>
-     {{ shift.pauseTime / 1000 | hhmmss }}</p>
+    {{ shift.pauseTime / 1000 | hhmmss }}</p>
 </ion-item>

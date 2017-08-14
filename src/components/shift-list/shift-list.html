@@ -1,3 +1,8 @@
 <ion-list>
-  <shift-list-item *ngFor="let s of shifts" [shift]="s"></shift-list-item>
+  <ion-item-group *ngFor="let c of contracts">
+    <ion-item-divider color="light">{{ c }}</ion-item-divider>
+    <div *ngFor="let s of shifts | filterByContract:c">
+      <shift-list-item *ngIf="!s.active" [shift]="s"></shift-list-item>
+    </div>
+  </ion-item-group>
 </ion-list>
